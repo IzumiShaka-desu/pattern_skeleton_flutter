@@ -16,6 +16,8 @@ class MyApp extends StatelessWidget {
 
   final SettingsController settingsController;
 
+  static GlobalKey gkey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     // Glue the SettingsController to the MaterialApp.
@@ -26,6 +28,7 @@ class MyApp extends StatelessWidget {
       animation: settingsController,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
+          key: gkey,
           // Providing a restorationScopeId allows the Navigator built by the
           // MaterialApp to restore the navigation stack when a user leaves and
           // returns to the app after it has been killed while running in the
