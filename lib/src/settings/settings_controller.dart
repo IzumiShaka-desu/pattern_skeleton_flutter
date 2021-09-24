@@ -20,6 +20,7 @@ class SettingsController with ChangeNotifier {
 
   // Allow Widgets to read the user's preferred ThemeMode.
   ThemeMode get themeMode => _themeMode;
+  bool get isThemeAutoBySystem => _themeMode == ThemeMode.system;
 
   /// Load the user's settings from the SettingsService. It may load from a
   /// local database or the internet. The controller only knows it can load the
@@ -47,5 +48,10 @@ class SettingsController with ChangeNotifier {
     // Persist the changes to a local database or the internet using the
     // SettingService.
     await _settingsService.updateThemeMode(newThemeMode);
+  }
+
+  void setThemeModeAuto(bool value) {
+    _themeMode = value ? ThemeMode.system : ThemeMode.light;
+    notifyListeners();
   }
 }
