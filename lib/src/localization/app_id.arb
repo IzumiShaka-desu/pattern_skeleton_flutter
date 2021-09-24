@@ -1,0 +1,6 @@
+{
+  "appTitle": "testing skeleton",
+  "@appTitle": {
+    "description": "judul aplikasi"
+  }
+}
