@@ -32,6 +32,18 @@ class SettingsView extends StatelessWidget {
               onChanged: controller.setThemeModeAuto,
               title: const Text("auto theme mode"),
             ),
+            AnimatedBuilder(
+              animation: controller,
+              builder: (context, _) {
+                return controller.isThemeAutoBySystem
+                    ? const SizedBox()
+                    : SwitchListTile.adaptive(
+                        title: const Text('darkmode'),
+                        value: controller.isDarkMode,
+                        onChanged: controller.setThemeModeDark,
+                      );
+              },
+            ),
           ],
         ),
       ),

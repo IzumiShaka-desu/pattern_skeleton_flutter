@@ -21,6 +21,7 @@ class SettingsController with ChangeNotifier {
   // Allow Widgets to read the user's preferred ThemeMode.
   ThemeMode get themeMode => _themeMode;
   bool get isThemeAutoBySystem => _themeMode == ThemeMode.system;
+  bool get isDarkMode => _themeMode == ThemeMode.dark;
 
   /// Load the user's settings from the SettingsService. It may load from a
   /// local database or the internet. The controller only knows it can load the
@@ -52,6 +53,11 @@ class SettingsController with ChangeNotifier {
 
   void setThemeModeAuto(bool value) {
     _themeMode = value ? ThemeMode.system : ThemeMode.light;
+    notifyListeners();
+  }
+
+  void setThemeModeDark(bool value) {
+    _themeMode = value ? ThemeMode.dark : ThemeMode.light;
     notifyListeners();
   }
 }
