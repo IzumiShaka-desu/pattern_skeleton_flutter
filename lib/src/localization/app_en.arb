@@ -2,5 +2,9 @@
   "appTitle": "skeleton test",
   "@appTitle": {
     "description": "The title of the application"
+  },
+  "networkErrorMessage": "network error: please check your connection",
+  "@networkErrorMessage": {
+    "description": "The message when network error has occured"
   }
 }

@@ -3,4 +3,8 @@
   "@appTitle": {
     "description": "judul aplikasi"
   }
+   "networkErrorMessage": "masalah jaringan: seilahkan periksa koneksi anda",
+  "@networkErrorMessage": {
+    "description": "The message when network error has occured"
+  }
 }
