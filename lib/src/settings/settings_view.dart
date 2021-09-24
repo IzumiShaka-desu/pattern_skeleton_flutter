@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeleton_test/src/global_widgets/molecules/cross_fade.dart';
 
 import 'settings_controller.dart';
 
@@ -32,18 +33,17 @@ class SettingsView extends StatelessWidget {
               onChanged: controller.setThemeModeAuto,
               title: const Text("auto theme mode"),
             ),
-            AnimatedBuilder(
-              animation: controller,
-              builder: (context, _) {
-                return controller.isThemeAutoBySystem
-                    ? const SizedBox()
-                    : SwitchListTile.adaptive(
-                        title: const Text('darkmode'),
-                        value: controller.isDarkMode,
-                        onChanged: controller.setThemeModeDark,
-                      );
-              },
-            ),
+            CrossFade<bool>(
+              initialData: false,
+              data: controller.isThemeAutoBySystem,
+              builder: (data) => data
+                  ? const SizedBox()
+                  : SwitchListTile.adaptive(
+                      title: const Text('darkmode'),
+                      value: controller.isDarkMode,
+                      onChanged: controller.setThemeModeDark,
+                    ),
+            )
           ],
         ),
       ),
