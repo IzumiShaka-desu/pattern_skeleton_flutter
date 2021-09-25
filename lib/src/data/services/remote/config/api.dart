@@ -10,7 +10,7 @@ class Api {
 
   final _dio = Dio(
     BaseOptions(
-      baseUrl: dotenv.env["BASEURL"]!,
+      baseUrl: dotenv.env['BASEURL']!,
       receiveTimeout: 3000,
       sendTimeout: 5000,
     ),
