@@ -29,9 +29,6 @@ class TodosScreen extends StatelessWidget {
       body: ListTodosItem(
         controller: TodosController(),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-      ),
     );
   }
 }
