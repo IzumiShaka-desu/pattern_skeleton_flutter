@@ -31,7 +31,7 @@ class SettingsView extends StatelessWidget {
             SwitchListTile.adaptive(
               value: controller.isThemeAutoBySystem,
               onChanged: controller.setThemeModeAuto,
-              title: const Text("auto theme mode"),
+              title: const Text('auto theme mode'),
             ),
             CrossFade<bool>(
               initialData: false,
