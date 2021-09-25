@@ -18,7 +18,7 @@ void main() async {
   ///load env variabel
   ///
 
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: '.env');
 
   // Run the app and pass in the SettingsController. The app listens to the
   // SettingsController for changes, then passes it further down to the
