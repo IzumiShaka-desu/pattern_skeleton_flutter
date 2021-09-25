@@ -23,6 +23,10 @@ class TodosController extends ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
+  bool _isLoadingNewItem = false;
+
+  bool get isLoadingNewItem => _isLoadingNewItem;
+
   void initialLoad({int retry = 0}) async {
     if (_isLoading) return;
     _isLoading = true;
@@ -31,16 +35,14 @@ class TodosController extends ChangeNotifier {
       _todos = await _service.getTodos(limit: 8);
     } on SocketException catch (e) {
       debugPrint('$e');
-
-      ///Fluttertoast.cancel();
+      Fluttertoast.cancel();
 
       if ('$e'.contains('network error')) {
         _retryInitialLoad(retry);
       }
     } catch (e) {
       debugPrint('$e');
-
-      ///Fluttertoast.cancel();
+      Fluttertoast.cancel();
 
       if ('$e'.contains('network error') || '$e'.contains('SocketException')) {
         _retryInitialLoad(retry);
@@ -63,12 +65,62 @@ class TodosController extends ChangeNotifier {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        ///Fluttertoast.cancel();
+        Fluttertoast.cancel();
 
         showToast(
           '${AppLocalizations.of(MyApp.gkey.currentContext!)?.retryMessage}: $retry',
         );
         initialLoad(
+          retry: retry,
+        );
+      },
+    );
+  }
+
+  void loadNewItem({int retry = 0}) async {
+    if (_isLoadingNewItem) return;
+    _isLoadingNewItem = true;
+    notifyListeners();
+    try {
+      _todos.addAll(await _service.getTodos(from: _todos.length, limit: 8));
+    } on SocketException catch (e) {
+      debugPrint('$e');
+      Fluttertoast.cancel();
+
+      if ('$e'.contains('network error')) {
+        _retryGetNewItem(retry);
+      }
+    } catch (e) {
+      debugPrint('$e');
+      Fluttertoast.cancel();
+
+      if ('$e'.contains('network error')) {
+        _retryGetNewItem(retry);
+      }
+    }
+    _isLoadingNewItem = false;
+    notifyListeners();
+  }
+
+  _retryGetNewItem(int retry) {
+    showToast(
+      AppLocalizations.of(MyApp.gkey.currentContext!)?.networkErrorMessage,
+    );
+    if (retry >= 5) {
+      _isLoadingNewItem = false;
+      notifyListeners();
+      return;
+    }
+    retry++;
+    Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        Fluttertoast.cancel();
+
+        showToast(
+          '${AppLocalizations.of(MyApp.gkey.currentContext!)?.retryMessage}: $retry',
+        );
+        loadNewItem(
           retry: retry,
         );
       },
