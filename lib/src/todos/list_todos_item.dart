@@ -38,12 +38,17 @@ class _ListTodosItemState extends State<ListTodosItem> {
   @override
   Widget build(BuildContext context) {
     return StatefulWrapper(
+      ///trigger initialLoad when widget has initialized
       onInit: () => widget.controller.initialLoad(),
       child: AnimatedBuilder(
         animation: widget.controller,
         builder: (context, _) => CrossFade<bool>(
           initialData: true,
           data: widget.controller.isLoading,
+          //when controller state isLoading active
+          //circular progress will show
+          //when isloading changed to false
+          //will replaced with listview builder
           builder: (isLoading) => isLoading
               ? const Center(
                   child: CircularProgressIndicator(),
@@ -53,6 +58,14 @@ class _ListTodosItemState extends State<ListTodosItem> {
                   itemExtent: 75,
                   itemCount: widget.controller.todos.length + 1,
                   itemBuilder: (ctx, index) {
+                    ///create listview builder thats itemcount is
+                    ///todos length plus 1 when index is >=
+                    ///length its will show an crossfade animation widget
+                    ///when isLoadingNewItem is active
+                    ///at child is will show circularprogressindicator
+                    ///when false will show sizedbox
+                    ///if index same as index at list item
+                    ///its will show listtile which contain list item
                     if (index >= widget.controller.todos.length) {
                       return CrossFade<bool>(
                         initialData: true,
@@ -64,6 +77,7 @@ class _ListTodosItemState extends State<ListTodosItem> {
                             : const SizedBox(),
                       );
                     }
+
                     var currentItem = widget.controller.todos.elementAt(index);
                     return ListTile(
                       subtitle: Text('${currentItem.title}'),
