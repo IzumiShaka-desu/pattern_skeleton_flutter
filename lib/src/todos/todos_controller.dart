@@ -27,7 +27,7 @@ class TodosController extends ChangeNotifier {
 
   bool get isLoadingNewItem => _isLoadingNewItem;
 
-  void initialLoad({int retry = 0}) async {
+  void initialLoad({int retry = 0, required BuildContext context}) async {
     if (_isLoading) return;
     _isLoading = true;
     notifyListeners();
@@ -35,26 +35,28 @@ class TodosController extends ChangeNotifier {
       _todos = await _service.getTodos(limit: 8);
     } on SocketException catch (e) {
       debugPrint('$e');
-      Fluttertoast.cancel();
+
+      ///Fluttertoast.cancel();
 
       if ('$e'.contains('network error')) {
-        _retryInitialLoad(retry);
+        _retryInitialLoad(retry, context);
       }
     } catch (e) {
       debugPrint('$e');
-      Fluttertoast.cancel();
 
-      if ('$e'.contains('network error') || '$e'.contains('SocketException')) {
-        _retryInitialLoad(retry);
+      ///Fluttertoast.cancel();
+
+      if ('$e'.contains('network error')) {
+        _retryInitialLoad(retry, context);
       }
     }
     _isLoading = false;
     notifyListeners();
   }
 
-  _retryInitialLoad(int retry) {
+  _retryInitialLoad(int retry, BuildContext context) {
     showToast(
-      AppLocalizations.of(MyApp.gkey.currentContext!)?.networkErrorMessage,
+      AppLocalizations.of(context)?.networkErrorMessage,
     );
     if (retry >= 5) {
       _isLoading = false;
@@ -65,19 +67,20 @@ class TodosController extends ChangeNotifier {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        Fluttertoast.cancel();
+        ///Fluttertoast.cancel();
 
         showToast(
-          '${AppLocalizations.of(MyApp.gkey.currentContext!)?.retryMessage}: $retry',
+          '${AppLocalizations.of(context)?.retryMessage}: $retry',
         );
         initialLoad(
           retry: retry,
+          context: context,
         );
       },
     );
   }
 
-  void loadNewItem({int retry = 0}) async {
+  void loadNewItem({int retry = 0, required BuildContext context}) async {
     if (_isLoadingNewItem) return;
     _isLoadingNewItem = true;
     notifyListeners();
@@ -85,26 +88,28 @@ class TodosController extends ChangeNotifier {
       _todos.addAll(await _service.getTodos(from: _todos.length, limit: 8));
     } on SocketException catch (e) {
       debugPrint('$e');
-      Fluttertoast.cancel();
+
+      ///Fluttertoast.cancel();
 
       if ('$e'.contains('network error')) {
-        _retryGetNewItem(retry);
+        _retryGetNewItem(retry, context);
       }
     } catch (e) {
       debugPrint('$e');
-      Fluttertoast.cancel();
+
+      ///Fluttertoast.cancel();
 
       if ('$e'.contains('network error')) {
-        _retryGetNewItem(retry);
+        _retryGetNewItem(retry, context);
       }
     }
     _isLoadingNewItem = false;
     notifyListeners();
   }
 
-  _retryGetNewItem(int retry) {
+  _retryGetNewItem(int retry, BuildContext context) {
     showToast(
-      AppLocalizations.of(MyApp.gkey.currentContext!)?.networkErrorMessage,
+      AppLocalizations.of(context)?.networkErrorMessage,
     );
     if (retry >= 5) {
       _isLoadingNewItem = false;
@@ -115,13 +120,14 @@ class TodosController extends ChangeNotifier {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        Fluttertoast.cancel();
+        ///Fluttertoast.cancel();
 
         showToast(
-          '${AppLocalizations.of(MyApp.gkey.currentContext!)?.retryMessage}: $retry',
+          '${AppLocalizations.of(context)?.retryMessage}: $retry',
         );
         loadNewItem(
           retry: retry,
+          context: context,
         );
       },
     );
@@ -129,10 +135,5 @@ class TodosController extends ChangeNotifier {
 }
 
 showToast(String? msg) => Fluttertoast.showToast(
-    msg: '$msg',
-    toastLength: Toast.LENGTH_SHORT,
-    gravity: ToastGravity.BOTTOM,
-    timeInSecForIosWeb: 1,
-    backgroundColor: Colors.red,
-    textColor: Colors.white,
-    fontSize: 16.0);
+      msg: '$msg',
+    );
