@@ -7,9 +7,10 @@ class TodosService {
   TodosService._internal();
   static final _singleton = TodosService._internal();
   factory TodosService() => _singleton;
-
   final Dio _client = Api().dioClient;
+
   static const path = '/todos';
+
   Future<List<Todos>> getTodos({int from = 0, int? limit}) async {
     var params = <String, dynamic>{};
     params['_start'] = from;
