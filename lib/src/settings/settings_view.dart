@@ -22,17 +22,20 @@ class SettingsView extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        // Glue the SettingsController to the theme selection DropdownButton.
-        //
-        // When a user selects a theme from the dropdown list, the
-        // SettingsController is updated, which rebuilds the MaterialApp.
         child: ListView(
           children: [
+            //create an switchlisttile
+            //when value changed to true it's set ThemeMode
+            //to ThemeMode.system
             SwitchListTile.adaptive(
               value: controller.isThemeAutoBySystem,
               onChanged: controller.setThemeModeAuto,
               title: const Text('auto theme mode'),
             ),
+            //create an switchlisttile it's will showed
+            //when ThemeMode!=ThemeMode.system
+            //when value changed to true it's set ThemeMode
+            //to ThemeMode.dark
             CrossFade<bool>(
               initialData: false,
               data: controller.isThemeAutoBySystem,
