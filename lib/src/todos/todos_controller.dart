@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:skeleton_test/src/app.dart';
 import 'package:skeleton_test/src/data/model/todos.dart';
 import 'package:skeleton_test/src/data/services/todos_service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
