@@ -1,5 +1,5 @@
+import 'package:animateable/animateable.dart';
 import 'package:flutter/material.dart';
-import 'package:skeleton_test/src/global_widgets/molecules/cross_fade.dart';
 import 'package:skeleton_test/src/global_widgets/molecules/statefull_wrapper.dart';
 import 'package:skeleton_test/src/modules/todos/todos_controller.dart';
 
