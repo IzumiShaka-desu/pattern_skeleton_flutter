@@ -2,27 +2,27 @@ name: skeleton_test
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
-environment: 
+environment:
   sdk: '>=2.12.0 <3.0.0'
-
-dependencies: 
-  flutter_dotenv: 5.0.2
+ 
+dependencies:
+  animateable: ^0.0.1
   dio: 4.0.0
+  flutter:
+    sdk: flutter
+  flutter_dotenv: 5.0.2
+  flutter_localizations:
+    sdk: flutter
   fluttertoast: 8.0.8
-  flutter: 
-    sdk: flutter
-  flutter_localizations: 
-    sdk: flutter
 
-dev_dependencies: 
+dev_dependencies:
   flutter_lints: ^1.0.0
-  flutter_test: 
+  flutter_test:
     sdk: flutter
 
-flutter: 
-  assets: 
+flutter:
+  assets:
     - assets/images/
     - .env
   uses-material-design: true
   generate: true
-
