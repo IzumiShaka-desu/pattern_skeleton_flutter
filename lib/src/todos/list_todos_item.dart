@@ -23,7 +23,7 @@ class _ListTodosItemState extends State<ListTodosItem> {
       if (_scrollController.hasClients &&
           _scrollController.offset ==
               _scrollController.position.maxScrollExtent) {
-        widget.controller.loadNewItem();
+        widget.controller.loadNewItem(context: context);
       }
     });
     super.initState();
@@ -39,7 +39,7 @@ class _ListTodosItemState extends State<ListTodosItem> {
   Widget build(BuildContext context) {
     return StatefulWrapper(
       ///trigger initialLoad when widget has initialized
-      onInit: () => widget.controller.initialLoad(),
+      onInit: () => widget.controller.initialLoad(context: context),
       child: AnimatedBuilder(
         animation: widget.controller,
         builder: (context, _) => CrossFade<bool>(
