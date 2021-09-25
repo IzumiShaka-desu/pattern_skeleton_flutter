@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:skeleton_test/src/app.dart';
 import 'package:skeleton_test/src/settings/settings_view.dart';
 import 'package:skeleton_test/src/todos/todos_controller.dart';
 
