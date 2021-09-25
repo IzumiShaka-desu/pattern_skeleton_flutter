@@ -6,5 +6,10 @@
    "networkErrorMessage": "masalah jaringan: seilahkan periksa koneksi anda",
   "@networkErrorMessage": {
     "description": "The message when network error has occured"
+  },
+  "retryMessage": "mencoba kembali",
+  "@retryMessage": {
+    "description": "The message when retrying process"
   }
+
 }

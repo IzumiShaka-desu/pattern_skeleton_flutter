@@ -6,5 +6,10 @@
   "networkErrorMessage": "network error: please check your connection",
   "@networkErrorMessage": {
     "description": "The message when network error has occured"
+  },
+  "retryMessage": "retrying",
+  "@retryMessage": {
+    "description": "The message when retrying process"
   }
+
 }
